@@ -53,7 +53,7 @@ spec:
     spec:
       containers:
         - name: fakeshop
-          image: victorbcassis/fake-shop-main
+          image: victorbcassis/fake-shop-main:latest
           ports:
             - containerPort: 5000
           env:
@@ -75,7 +75,7 @@ kind: Service
 metadata:
   name: fakeshop
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 5000
       nodePort: 30000
