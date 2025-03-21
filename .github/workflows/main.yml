@@ -26,6 +26,7 @@ jobs:
     needs: [CI]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "obter código"
+      - name: "obter código"
+        uses: actions/checkout@v4.2.2
       - run: echo "configurar o kubeconfig"
       - run: echo "executar o apply"
