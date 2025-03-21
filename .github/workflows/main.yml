@@ -8,8 +8,20 @@ jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "obter código"
-      - run: echo "executar o docker build"
+      - name: "obter código"
+        uses: actions/checkout@v4.2.2
+      - name: "executar o docker login"
+        uses: docker/login-action@v3.4.0
+        with:
+            username: ${{ secrets.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: "executar o docker build e push"
+        uses: docker/build-push-action@v6.15.0
+        with:
+          context: ./src
+          push: true
+          file: ./src/Dockerfile
+          tags: user/app:lastest
       - run: echo "enviar a imagem docker para o docker hub"
   CD:
     needs: [CI]
