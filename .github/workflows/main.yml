@@ -21,7 +21,7 @@ jobs:
           context: ./src
           push: true
           file: ./src/Dockerfile
-          tags: user/app:lastest
+          tags: victorbcassis/fake-shop-main:lastest
       - run: echo "enviar a imagem docker para o docker hub"
   CD:
     needs: [CI]
