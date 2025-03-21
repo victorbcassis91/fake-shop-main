@@ -28,5 +28,13 @@ jobs:
     steps:
       - name: "obter código"
         uses: actions/checkout@v4.2.2
-      - run: echo "configurar o kubeconfig"
-      - run: echo "executar o apply"
+      - name: "configurar o kubeconfig"
+        uses: Azure/aks-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.K8S_KUBECONFIG }}
+      - name: "executar o apply"
+        uses: Azure/k8s-deploy@v4.9
+        with:
+          manifests: k8s/deployment.yaml
+          images: victorbcassis/fake-shop-main:v${{ github.run_number }}
